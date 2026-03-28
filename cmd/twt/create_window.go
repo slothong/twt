@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
 
 	"github.com/slothong/twt/internal/git"
 	"github.com/slothong/twt/internal/tmux"
@@ -12,17 +13,30 @@ import (
 
 func newCreateWindowCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-window <worktree-name> <branch-name> [base-branch]",
+		Use:   "create-window <branch-name> [worktree-name] [base-branch]",
 		Short: "Create a new worktree in a new tmux window",
 		Long: `Creates a new git worktree and opens it in a new tmux window.
-Must be run inside a tmux session.`,
-		Args: cobra.RangeArgs(2, 3),
+Must be run inside a tmux session.
+
+If worktree-name is not provided, it will be auto-generated from branch-name
+by replacing slashes with hyphens (e.g., feature/foo -> feature-foo).`,
+		Args: cobra.RangeArgs(1, 3),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			worktreeName := args[0]
-			branchName := args[1]
+			branchName := args[0]
+			worktreeName := ""
 			baseBranch := "HEAD"
-			if len(args) > 2 {
+
+			// Parse arguments based on count
+			if len(args) >= 2 {
+				worktreeName = args[1]
+			}
+			if len(args) >= 3 {
 				baseBranch = args[2]
+			}
+
+			// Auto-generate worktree name if not provided
+			if worktreeName == "" {
+				worktreeName = strings.ReplaceAll(branchName, "/", "-")
 			}
 
 			return runCreateWindow(worktreeName, branchName, baseBranch)

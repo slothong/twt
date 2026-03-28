@@ -52,16 +52,24 @@ This will:
 Create a new worktree in a new tmux window (must be run inside tmux):
 
 ```bash
-twt create-window <worktree-name> <branch-name> [base-branch]
+twt create-window <branch-name> [worktree-name] [base-branch]
 ```
+
+If `worktree-name` is not provided, it will be auto-generated from `branch-name` by replacing slashes with hyphens.
 
 Examples:
 ```bash
-# Create worktree from current HEAD
-twt create-window feature-foo feature/foo
+# Auto-generate worktree name from branch (feature/foo -> feature-foo)
+twt create-window feature/foo
 
-# Create worktree from main branch
-twt create-window feature-foo feature/foo main
+# Auto-generate with custom base branch
+twt create-window feature/foo main
+
+# Use custom worktree name
+twt create-window feature/foo custom-name
+
+# Use custom worktree name with base branch
+twt create-window feature/foo custom-name main
 ```
 
 ### Remove Window

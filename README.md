@@ -17,7 +17,7 @@ A CLI tool for managing git worktrees with tmux integration.
 curl -sSL https://raw.githubusercontent.com/slothong/twt/main/install.sh | bash
 ```
 
-OS와 아키텍처를 자동 감지하여 `~/.local/bin`에 설치됩니다.
+Automatically detects OS and architecture, and installs to `~/.local/bin`.
 
 ### Using Go Install
 

@@ -29,8 +29,6 @@ curl -L https://github.com/slothong/twt/releases/latest/download/twt_linux_amd64
 sudo mv twt /usr/local/bin/
 ```
 
-> **Note:** `latest` URL은 아카이브 파일명에 버전이 포함되어 있어 동작하지 않을 수 있습니다. 그 경우 [Releases 페이지](https://github.com/slothong/twt/releases)에서 직접 다운로드하세요.
-
 ### Using Go Install
 
 ```bash

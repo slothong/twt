@@ -1,4 +1,4 @@
-module github.com/Buzzvil/tmux-worktree
+module github.com/slothong/twt
 
 go 1.21
 

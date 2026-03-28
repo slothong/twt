@@ -4,15 +4,13 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/Buzzvil/tmux-worktree/internal/git"
-	"github.com/Buzzvil/tmux-worktree/internal/tmux"
-	"github.com/Buzzvil/tmux-worktree/internal/ui"
+	"github.com/slothong/twt/internal/git"
+	"github.com/slothong/twt/internal/tmux"
+	"github.com/slothong/twt/internal/ui"
 	"github.com/spf13/cobra"
 )
 
 func newCreateWindowCmd() *cobra.Command {
-	var noIDE bool
-
 	cmd := &cobra.Command{
 		Use:   "create-window <worktree-name> <branch-name> [base-branch]",
 		Short: "Create a new worktree in a new tmux window",
@@ -27,16 +25,14 @@ Must be run inside a tmux session.`,
 				baseBranch = args[2]
 			}
 
-			return runCreateWindow(worktreeName, branchName, baseBranch, noIDE)
+			return runCreateWindow(worktreeName, branchName, baseBranch)
 		},
 	}
-
-	cmd.Flags().BoolVar(&noIDE, "no-ide", false, "Don't set up IDE layout in the new window")
 
 	return cmd
 }
 
-func runCreateWindow(worktreeName, branchName, baseBranch string, noIDE bool) error {
+func runCreateWindow(worktreeName, branchName, baseBranch string) error {
 	// Check if running inside tmux
 	if !tmux.IsInsideTmux() {
 		ui.Error("This command must be run inside a tmux session")
@@ -66,15 +62,6 @@ func runCreateWindow(worktreeName, branchName, baseBranch string, noIDE bool) er
 		// If window creation fails, try to clean up the worktree
 		git.RemoveWorktree(worktreePath, true)
 		return err
-	}
-
-	// Set up IDE layout if requested
-	if !noIDE {
-		ui.Info("Setting up IDE layout...")
-		target := worktreeName
-		if err := tmux.SetupIDELayout(target); err != nil {
-			ui.Warning(fmt.Sprintf("Failed to set up IDE layout: %v", err))
-		}
 	}
 
 	ui.Success("Worktree window created!")

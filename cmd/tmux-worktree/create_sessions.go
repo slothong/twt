@@ -2,33 +2,27 @@ package main
 
 import (
 	"fmt"
-	"time"
 
-	"github.com/Buzzvil/tmux-worktree/internal/git"
-	"github.com/Buzzvil/tmux-worktree/internal/tmux"
-	"github.com/Buzzvil/tmux-worktree/internal/ui"
+	"github.com/slothong/twt/internal/git"
+	"github.com/slothong/twt/internal/tmux"
+	"github.com/slothong/twt/internal/ui"
 	"github.com/spf13/cobra"
 )
 
 func newCreateSessionsCmd() *cobra.Command {
-	var noIDE bool
-
 	cmd := &cobra.Command{
 		Use:   "create-sessions",
 		Short: "Create tmux session with windows for all git worktrees",
-		Long: `Creates a tmux session with a window for each git worktree.
-Each window will have the IDE layout set up automatically.`,
+		Long:  `Creates a tmux session with a window for each git worktree.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return runCreateSessions(noIDE)
+			return runCreateSessions()
 		},
 	}
-
-	cmd.Flags().BoolVar(&noIDE, "no-ide", false, "Don't set up IDE layout in windows")
 
 	return cmd
 }
 
-func runCreateSessions(noIDE bool) error {
+func runCreateSessions() error {
 	sessionName := "pointhub-worktrees"
 
 	// Check if session already exists
@@ -73,29 +67,6 @@ func runCreateSessions(noIDE bool) error {
 
 		if err := tmux.NewWindow(sessionName, name, wt.Path); err != nil {
 			return err
-		}
-	}
-
-	// Set up IDE layout for each window if requested
-	if !noIDE {
-		fmt.Println()
-		ui.Info("Setting up IDE layout in each window...")
-
-		windows, err := tmux.ListWindows(sessionName)
-		if err != nil {
-			return err
-		}
-
-		for _, win := range windows {
-			ui.Info(fmt.Sprintf("  -> Setting up window '%s' (index: %d)", win.Name, win.Index))
-			target := fmt.Sprintf("%s:%d", sessionName, win.Index)
-
-			if err := tmux.SetupIDELayout(target); err != nil {
-				ui.Warning(fmt.Sprintf("Failed to set up IDE layout for window '%s': %v", win.Name, err))
-				continue
-			}
-
-			time.Sleep(500 * time.Millisecond)
 		}
 	}
 

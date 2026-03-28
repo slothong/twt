@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"strings"
-	"time"
 )
 
 // Window represents a tmux window
@@ -161,35 +160,3 @@ func GetCurrentWindowName() (string, error) {
 	return strings.TrimSpace(string(output)), nil
 }
 
-// SetupIDELayout sets up the IDE layout for a window
-func SetupIDELayout(target string) error {
-	// 1. Split right 30% for claude
-	if err := SplitWindow(target, true, 30, "zsh -lc 'claude; exec zsh'"); err != nil {
-		return err
-	}
-
-	// 2. Select left pane
-	if err := SelectPane(target + ".0"); err != nil {
-		return err
-	}
-
-	// 3. Split bottom 25%
-	if err := SplitWindow(target+".0", false, 25, ""); err != nil {
-		return err
-	}
-
-	// Small delay to ensure pane is created
-	time.Sleep(100 * time.Millisecond)
-
-	// 4. Split the bottom pane horizontally 50%
-	if err := SplitWindow(target+".1", true, 50, ""); err != nil {
-		return err
-	}
-
-	// 5. Select top-left pane
-	if err := SelectPane(target + ".0"); err != nil {
-		return err
-	}
-
-	return nil
-}

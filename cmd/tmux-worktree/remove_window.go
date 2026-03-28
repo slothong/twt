@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/Buzzvil/tmux-worktree/internal/git"
-	"github.com/Buzzvil/tmux-worktree/internal/tmux"
-	"github.com/Buzzvil/tmux-worktree/internal/ui"
+	"github.com/slothong/twt/internal/git"
+	"github.com/slothong/twt/internal/tmux"
+	"github.com/slothong/twt/internal/ui"
 	"github.com/spf13/cobra"
 )
 

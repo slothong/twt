@@ -13,8 +13,9 @@ func newRemoveWindowCmd() *cobra.Command {
 	var force bool
 
 	cmd := &cobra.Command{
-		Use:   "remove-window",
-		Short: "Remove current worktree and close tmux window",
+		Use:     "remove-window",
+		Aliases: []string{"rw", "rm"},
+		Short:   "Remove current worktree and close tmux window",
 		Long: `Removes the current git worktree and closes the current tmux window.
 Must be run inside a tmux session from a worktree directory.`,
 		RunE: func(cmd *cobra.Command, args []string) error {

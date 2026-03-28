@@ -11,9 +11,10 @@ import (
 
 func newCreateSessionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-sessions",
-		Short: "Create tmux session with windows for all git worktrees",
-		Long:  `Creates a tmux session with a window for each git worktree.`,
+		Use:     "create-sessions",
+		Aliases: []string{"cs"},
+		Short:   "Create tmux session with windows for all git worktrees",
+		Long:    `Creates a tmux session with a window for each git worktree.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return runCreateSessions()
 		},

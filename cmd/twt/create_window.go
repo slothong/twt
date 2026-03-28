@@ -13,8 +13,9 @@ import (
 
 func newCreateWindowCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-window <branch-name> [worktree-name] [base-branch]",
-		Short: "Create a new worktree in a new tmux window",
+		Use:     "create-window <branch-name> [worktree-name] [base-branch]",
+		Aliases: []string{"cw", "new"},
+		Short:   "Create a new worktree in a new tmux window",
 		Long: `Creates a new git worktree and opens it in a new tmux window.
 Must be run inside a tmux session.
 

@@ -40,6 +40,8 @@ Create a tmux session with a window for each git worktree:
 
 ```bash
 twt create-sessions
+# or use alias
+twt cs
 ```
 
 This will:
@@ -53,6 +55,9 @@ Create a new worktree in a new tmux window (must be run inside tmux):
 
 ```bash
 twt create-window <branch-name> [worktree-name] [base-branch]
+# or use aliases
+twt cw <branch-name> [worktree-name] [base-branch]
+twt new <branch-name> [worktree-name] [base-branch]
 ```
 
 If `worktree-name` is not provided, it will be auto-generated from `branch-name` by replacing slashes with hyphens.
@@ -60,16 +65,16 @@ If `worktree-name` is not provided, it will be auto-generated from `branch-name`
 Examples:
 ```bash
 # Auto-generate worktree name from branch (feature/foo -> feature-foo)
-twt create-window feature/foo
+twt cw feature/foo
 
 # Auto-generate with custom base branch
-twt create-window feature/foo main
+twt new feature/foo main
 
 # Use custom worktree name
-twt create-window feature/foo custom-name
+twt cw feature/foo custom-name
 
 # Use custom worktree name with base branch
-twt create-window feature/foo custom-name main
+twt new feature/foo custom-name main
 ```
 
 ### Remove Window
@@ -78,6 +83,9 @@ Remove the current worktree and close the tmux window (must be run inside tmux f
 
 ```bash
 twt remove-window
+# or use aliases
+twt rw
+twt rm
 ```
 
 This will:
@@ -89,6 +97,15 @@ This will:
 
 Options:
 - `-f, --force`: Force removal even with uncommitted changes
+
+Examples:
+```bash
+# Remove with confirmation
+twt rm
+
+# Force remove without confirmation
+twt rm -f
+```
 
 ## Requirements
 

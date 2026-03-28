@@ -11,25 +11,38 @@ A CLI tool for managing git worktrees with tmux integration.
 
 ## Installation
 
-### From Source
+### Binary (recommended)
+
+[Releases 페이지](https://github.com/slothong/twt/releases)에서 바이너리를 다운로드하거나, curl로 설치:
 
 ```bash
-# Clone the repository
-git clone https://github.com/slothong/twt
-cd twt
-
-# Build and install
-go build -o twt ./cmd/twt
+# macOS (Apple Silicon)
+curl -L https://github.com/slothong/twt/releases/latest/download/twt_darwin_arm64.tar.gz | tar xz
 sudo mv twt /usr/local/bin/
 
-# Or use the install script
-./install.sh
+# macOS (Intel)
+curl -L https://github.com/slothong/twt/releases/latest/download/twt_darwin_amd64.tar.gz | tar xz
+sudo mv twt /usr/local/bin/
+
+# Linux (amd64)
+curl -L https://github.com/slothong/twt/releases/latest/download/twt_linux_amd64.tar.gz | tar xz
+sudo mv twt /usr/local/bin/
 ```
+
+> **Note:** `latest` URL은 아카이브 파일명에 버전이 포함되어 있어 동작하지 않을 수 있습니다. 그 경우 [Releases 페이지](https://github.com/slothong/twt/releases)에서 직접 다운로드하세요.
 
 ### Using Go Install
 
 ```bash
-go install github.com/Buzzvil/twt/cmd/twt@latest
+go install github.com/slothong/twt/cmd/twt@latest
+```
+
+### From Source
+
+```bash
+git clone https://github.com/slothong/twt
+cd twt
+make install
 ```
 
 ## Usage

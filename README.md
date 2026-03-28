@@ -1,4 +1,4 @@
-# tmux-worktree
+# twt
 
 A CLI tool for managing git worktrees with tmux integration.
 
@@ -15,12 +15,12 @@ A CLI tool for managing git worktrees with tmux integration.
 
 ```bash
 # Clone the repository
-git clone https://github.com/Buzzvil/tmux-worktree
-cd tmux-worktree
+git clone https://github.com/slothong/twt
+cd twt
 
 # Build and install
-go build -o tmux-worktree ./cmd/tmux-worktree
-sudo mv tmux-worktree /usr/local/bin/
+go build -o twt ./cmd/twt
+sudo mv twt /usr/local/bin/
 
 # Or use the install script
 ./install.sh
@@ -29,7 +29,7 @@ sudo mv tmux-worktree /usr/local/bin/
 ### Using Go Install
 
 ```bash
-go install github.com/Buzzvil/tmux-worktree/cmd/tmux-worktree@latest
+go install github.com/Buzzvil/twt/cmd/twt@latest
 ```
 
 ## Usage
@@ -39,7 +39,7 @@ go install github.com/Buzzvil/tmux-worktree/cmd/tmux-worktree@latest
 Create a tmux session with a window for each git worktree:
 
 ```bash
-tmux-worktree create-sessions
+twt create-sessions
 ```
 
 This will:
@@ -52,16 +52,16 @@ This will:
 Create a new worktree in a new tmux window (must be run inside tmux):
 
 ```bash
-tmux-worktree create-window <worktree-name> <branch-name> [base-branch]
+twt create-window <worktree-name> <branch-name> [base-branch]
 ```
 
 Examples:
 ```bash
 # Create worktree from current HEAD
-tmux-worktree create-window feature-foo feature/foo
+twt create-window feature-foo feature/foo
 
 # Create worktree from main branch
-tmux-worktree create-window feature-foo feature/foo main
+twt create-window feature-foo feature/foo main
 ```
 
 ### Remove Window
@@ -69,7 +69,7 @@ tmux-worktree create-window feature-foo feature/foo main
 Remove the current worktree and close the tmux window (must be run inside tmux from a worktree):
 
 ```bash
-tmux-worktree remove-window
+twt remove-window
 ```
 
 This will:
@@ -92,17 +92,17 @@ Options:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Buzzvil/tmux-worktree
-cd tmux-worktree
+git clone https://github.com/slothong/twt
+cd twt
 
 # Install dependencies
 go mod download
 
 # Build
-go build -o tmux-worktree ./cmd/tmux-worktree
+go build -o twt ./cmd/twt
 
 # Run
-./tmux-worktree --help
+./twt --help
 ```
 
 ## License

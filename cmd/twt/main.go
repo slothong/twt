@@ -11,9 +11,9 @@ var version = "dev"
 
 func main() {
 	rootCmd := &cobra.Command{
-		Use:   "tmux-worktree",
+		Use:   "twt",
 		Short: "Manage git worktrees with tmux integration",
-		Long: `tmux-worktree is a CLI tool for managing git worktrees with tmux integration.
+		Long: `twt is a CLI tool for managing git worktrees with tmux integration.
 It allows you to create tmux sessions/windows for worktrees and manage them easily.`,
 		Version: version,
 	}

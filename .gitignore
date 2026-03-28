@@ -19,6 +19,7 @@ go.work
 
 # Build output
 /tmux-worktree
+/twt
 /bin/
 /dist/
 

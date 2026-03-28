@@ -1,10 +1,10 @@
 .PHONY: build install clean test
 
-BINARY_NAME=tmux-worktree
+BINARY_NAME=twt
 INSTALL_DIR=$(HOME)/.local/bin
 
 build:
-	go build -o $(BINARY_NAME) ./cmd/tmux-worktree
+	go build -o $(BINARY_NAME) ./cmd/twt
 
 install: build
 	mkdir -p $(INSTALL_DIR)
@@ -20,7 +20,7 @@ test:
 	go test -v ./...
 
 run:
-	go run ./cmd/tmux-worktree
+	go run ./cmd/twt
 
 help:
 	@echo "Available targets:"

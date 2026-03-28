@@ -3,10 +3,10 @@
 set -euo pipefail
 
 INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
-BINARY_NAME="tmux-worktree"
+BINARY_NAME="twt"
 
 echo "Building $BINARY_NAME..."
-go build -o "$BINARY_NAME" ./cmd/tmux-worktree
+go build -o "$BINARY_NAME" ./cmd/twt
 
 echo "Installing to $INSTALL_DIR..."
 mkdir -p "$INSTALL_DIR"
